@@ -3,10 +3,18 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas as pd
 from collections import defaultdict
-from pprint import pprint
+import argparse
+import os
 
+parser = argparse.ArgumentParser(description='Введите название файла в формате xlsx (Пример: wine.xlsx) '
+                                             'и нажмите Enter. Из этого файла программа возмёт данные для '
+                                             'формирования цен, названий и сортов вина. '
+                                             'Файл нужно положить в папку со скриптом.')
+parser.add_argument('file_name', help='Название файла')
+args = parser.parse_args()
 
-excel_data_frame = pd.read_excel('wine4.xlsx', sheet_name="Лист1")
+root_dir = os.getcwd() + "\\"
+excel_data_frame = pd.read_excel(root_dir+args.name, sheet_name="Лист1")
 data_from_excel = excel_data_frame.to_dict('records')
 
 new_dict = defaultdict(list)
