@@ -14,33 +14,30 @@ parser.add_argument('file_name', help='Название файла')
 args = parser.parse_args()
 
 root_dir = os.getcwd() + "\\"
-excel_data_frame = pd.read_excel(root_dir+args.name, sheet_name="Лист1")
-data_from_excel = excel_data_frame.to_dict('records')
+excel_file = pd.read_excel(root_dir+args.file_name, sheet_name="Лист1")
+records_from_excel_file = excel_file.to_dict('records')
 
-new_dict = defaultdict(list)
-new_list = list()
+categories = defaultdict(list)
 
-for key in data_from_excel:
-    new_dict[key['Категория']].append(key)
+for key in records_from_excel_file:
+    categories[key['Категория']].append(key)
 
-cat_list = list(new_dict.keys())
+cat_list = list(categories.keys())
 
 cat1 = cat_list[0]
 cat2 = cat_list[1]
 cat3 = cat_list[2]
 
-white_wine = new_dict[cat1]
-napitki = new_dict[cat2]
-red_wine = new_dict[cat3]
+white_wine = categories[cat1]
+napitki = categories[cat2]
+red_wine = categories[cat3]
 
-# удаляю в напитках элемент "Сорт", т.к. по задаче его не должно быть ни в коде, ни в шаблоне
 for elem in napitki:
     try:
         del elem['Сорт']
     except KeyError:
         pass
 
-# проверка на "выгодное предложение"
 for elem in napitki:
     if elem["Акция"] == "Выгодное предложение":
         pass
@@ -59,17 +56,21 @@ for elem in red_wine:
     else:
         del elem['Акция']
 
-# pprint(napitki)
-# pprint(white_wine)
-# pprint(red_wine)
-# breakpoint()
-
 
 def years():
-    run_time = datetime.datetime(year=1920, month=1, day=1, hour=1)
+    run_time = 1920
     now_time = datetime.datetime.today()
-    years_with_you = now_time.year - run_time.year
-    return years_with_you
+    years_with_you = now_time.year - run_time
+    if years_with_you == 100:
+        ending = "лет"
+    elif years_with_you == 102 or years_with_you == 103 or years_with_you == 104:
+        ending = "года"
+    elif years_with_you == 101:
+        ending = "год"
+    else:
+        ending = "лет"
+
+    return f"Уже {years_with_you} {ending} с Вами"
 
 
 env = Environment(
@@ -81,7 +82,7 @@ template = env.get_template('template.html')
 
 rendered_page = template.render(
     years_with_you=years(),
-    items=new_dict,
+    items=categories,
     drinks=napitki,
     white=white_wine,
     red=red_wine,
