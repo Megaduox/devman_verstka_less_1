@@ -14,13 +14,13 @@ parser.add_argument('file_name', help='Название файла')
 args = parser.parse_args()
 
 root_dir = os.getcwd() + "\\"
-excel_file = pd.read_excel(root_dir+args.name, sheet_name="Лист1")
-dictionary_from_excel = excel_file.to_dict('records')
+excel_data_frame = pd.read_excel(root_dir+args.name, sheet_name="Лист1")
+data_from_excel = excel_data_frame.to_dict('records')
 
 new_dict = defaultdict(list)
 new_list = list()
 
-for key in dictionary_from_excel:
+for key in data_from_excel:
     new_dict[key['Категория']].append(key)
 
 cat_list = list(new_dict.keys())
