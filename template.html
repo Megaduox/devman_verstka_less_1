@@ -112,72 +112,32 @@
             </p>
           </div>
         </div>
-         <h2 class="d-block">{{cat1}}</h2>
 
+        {% for item in items %}
+        <h2 class="d-block text-center">{{item}}</h2>
         <div class="row">
-        {% for wh in white %}
+        {% for product in items[item] %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{wh.Картинка}}" alt="Image" class="img-fluid">
-              {% if wh.Акция %}
+              <img src="images/{{product.Картинка}}" alt="Image" class="img-fluid">
+              {% if product.Акция == "Выгодное предложение" %}
                 <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
               {% endif %}
               <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{wh.Название}}</h3>
+                <h3 class="heading mt-3 mb-3 text-dark">{{product.Название}}</h3>
                 <p>
-                  Сорт винограда - {{wh.Сорт}}<br/>
-                  <span class="price">{{wh.Цена}}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-
-        </div>
-        <h2 class="d-block">{{cat3}}</h2>
-
-        <div class="row">
-        {% for re in red %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{re.Картинка}}" alt="Image" class="img-fluid">
-              {% if re.Акция %}
-                <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-              {% endif %}
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{re.Название}}</h3>
-                <p>
-                  Сорт винограда - {{re.Сорт}}<br/>
-                  <span class="price">{{re.Цена}}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-
-        </div>
-
-        <h2 class="d-block">{% if cat2%}{{cat2}}{% endif %}</h2>
-
-        <div class="row">
-        {% for dr in drinks %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{dr.Картинка}}" alt="Image" class="img-fluid">
-              {% if dr.Акция %}
-                <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-              {% endif %}
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{dr.Название}}</h3>
-                <p>
-                  <!--Сорт винограда - {{dr.Сорт}}<br/>-->
-                  <span class="price">{{dr.Цена}}</span>
+                  {% if product.Сорт is string %}
+                    Сорт винограда - {{product.Сорт}}<br/>
+                  {% endif %}
+                  <span class="price">{{product.Цена}}</span>
                 </p>
               </div>
             </div>
           </div>
         {% endfor %}
         </div>
+
+        {% endfor %}
 
     <div class="hero-2" style="background-image: url('assets/hero_2.jpg');">
     <div><a id="feedback"></a></div>
