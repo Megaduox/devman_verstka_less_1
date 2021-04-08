@@ -34,7 +34,7 @@ def main():
                                                  'Файл нужно положить в папку со скриптом.')
     parser.add_argument('file_name', help='Название файла')
     args = parser.parse_args()
-    excel_file = pd.read_excel(args.file_name, sheet_name="Лист1")
+    excel_file = pd.read_excel(args.file_name, sheet_name="Лист1", na_values=False, keep_default_na=False)
     records_from_excel_file = excel_file.to_dict('records')
     pruduction = defaultdict(list)
 
