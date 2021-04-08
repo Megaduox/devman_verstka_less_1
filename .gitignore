@@ -1,3 +1,4 @@
 test.py
 *.xls;xlsx;csv
 index.html
+venv

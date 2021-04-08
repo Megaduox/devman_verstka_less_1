@@ -5,7 +5,11 @@
 ## Запуск
 
 - Скачайте код
-- Запустите сайт командой `python main.py -[название xlsx файла]`. 
+- Установите зависимости командой в терминале `pip install
+ -r /path/to/requirements.txt`
+
+- Запустите сайт командой `python main.py -[название xlsx файла]` 
+
 Пример: 
 ```python
 python main.py -example.xlsx
