@@ -6,15 +6,18 @@
 
 - Скачайте код
 - Установите зависимости командой в терминале
- 
- `pip install -r requirements.txt`
+```console
+python main.py -example.xlsx
+```
 
-- Запустите сайт командой
- 
- `python main.py -[название xlsx файла]` 
+- Запустите сайт командой в консоли
+
+```console
+python main.py -[название xlsx файла]`
+```
 
 Пример: 
-```python
+```console
 python main.py -example.xlsx
 ```
 - Перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000).
